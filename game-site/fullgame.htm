@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Rio's Game</title>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css" />
+	<style type="text/css" media="screen">
+		#canvas {
+		  background:skyblue;
+		}
+		#game-panels {
+			display:inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="page-header">
+					<h1>Rio's Game</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<p>Use the arrow keys to move and collect the shiny coins.</p>
+			</div>
+			<div class="col-sm-6 col-md-2 col-md-offset-4">
+				<div class="panel panel-success">
+					<div class="panel-heading text-center">Score</div>
+					<div class="panel-body text-center">
+						<span id="score-label">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="game-panel" class="panel panel-primary">
+					<div class="panel-heading"><h3 class="panel-title">Game Screen</h3></div>
+					<div class="panel-body">
+						<canvas id="canvas" width="1100" height="500"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-md-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading text-center">Controls</div>
+					<div class="panel-body">
+						<div class="form-horizontal">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="chkAudio" checked="checked" /> Enable audio
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="chkTileCoords" /> Show tile coordinates
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="chkBorders" /> Show borders
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="lib/jquery.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/keyboard.js"></script>
+	<script src="js/animation.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/player.js"></script>
+	<script src="js/game.js"></script>
+	<script>
+	Game.run();
+	$('#chkAudio').change(function(){
+		if ( $(this).is(':checked') ) {
+			Game.backgroundMusic.play();
+			Game.playAudio = true;
+		} else {
+			Game.backgroundMusic.pause();
+			Game.playAudio = false;
+		}
+	});
+	$('#chkTileCoords').change(function(){
+		Map.drawCellInfo = $(this).is(':checked');
+	});
+	$('#chkBorders').change(function(){
+		Map.drawBorders = $(this).is(':checked');
+	});
+	</script>
+</body>
+</html>
